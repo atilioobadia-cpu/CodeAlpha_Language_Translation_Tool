@@ -191,14 +191,6 @@ updateInputCount();
 renderHistory();
 
 document.querySelectorAll('.nav[data-view]').forEach(button => button.addEventListener('click', () => setView(button.dataset.view)));
-document.querySelector('#newTranslationButton').addEventListener('click', () => {
-  sourceText.value = '';
-  clearTranslation();
-  updateInputCount();
-  setView('translate');
-  document.querySelector('#translateView').scrollTop = 0;
-  sourceText.focus();
-});
 document.querySelector('#clearHistoryButton').addEventListener('click', () => { historyItems = []; renderHistory(); });
 translateButton.addEventListener('click', translate);
 sourceText.addEventListener('input', () => { updateInputCount(); clearTranslation(); });
