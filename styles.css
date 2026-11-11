@@ -74,6 +74,7 @@ body{background:#edf3f2;display:flex;align-items:center;justify-content:center}
 .language-field:last-child .language-menu{left:auto;right:0}
 @keyframes language-menu-in{from{opacity:0;transform:translateY(-5px) scale(.985)}to{opacity:1;transform:translateY(0) scale(1)}}
 .language-search-wrap{height:36px;padding:0 9px;border:1px solid #e3ecea;border-radius:9px;background:#f8fbfa;display:flex;align-items:center;gap:8px}
+.language-field .language-search-wrap{display:flex;width:100%;height:36px;margin:0;color:inherit;font-size:inherit;font-weight:400;letter-spacing:normal;text-transform:none}
 .language-search-wrap:focus-within{border-color:#9fc9c3;background:#fff}
 .language-search-wrap svg{width:15px;height:15px;flex:none;fill:none;stroke:#71818a;stroke-width:1.8;stroke-linecap:round}
 .language-search{width:100%;min-width:0;border:0;outline:0;background:transparent;color:#263943;font:600 12px "Nunito",sans-serif}
