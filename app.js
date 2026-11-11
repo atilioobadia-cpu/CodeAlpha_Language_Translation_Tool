@@ -54,12 +54,127 @@ function setStatus(message = '', isError = false) {
 function updateTargetLabel() {
   const target = languages.find(language => language.code === targetLanguage.value);
   targetLanguageName.textContent = target ? target.name : 'Translation';
+  syncLanguagePickerText('sourceLanguage');
+  syncLanguagePickerText('targetLanguage');
 }
 
 function languageName(code) {
   return languages.find(language => language.code === code)?.name || code;
 }
 
+function syncLanguagePickerText(selectId) {
+  const select = document.getElementById(selectId);
+  const value = document.getElementById(`${selectId}Value`);
+  if (select && value) value.textContent = languageName(select.value);
+  const menu = document.getElementById(`${selectId}Menu`);
+  if (menu && !menu.hidden) renderLanguageOptions(selectId);
+}
+
+function renderLanguageOptions(selectId) {
+  const select = document.getElementById(selectId);
+  const search = document.getElementById(`${selectId}Search`);
+  const list = document.getElementById(`${selectId}Options`);
+  const count = document.getElementById(`${selectId}Count`);
+  const query = search.value.trim().toLocaleLowerCase();
+  const matches = languages.filter(language => `${language.name} ${language.code}`.toLocaleLowerCase().includes(query));
+  list.replaceChildren();
+  matches.forEach(language => {
+    const option = document.createElement('button');
+    option.type = 'button';
+    option.className = 'language-option';
+    option.setAttribute('role', 'option');
+    option.setAttribute('aria-selected', String(language.code === select.value));
+    option.dataset.code = language.code;
+    const name = document.createElement('span');
+    name.className = 'language-option-name';
+    name.textContent = language.name;
+    const code = document.createElement('span');
+    code.className = 'language-option-code';
+    code.textContent = language.code.toLocaleUpperCase();
+    const check = document.createElement('span');
+    check.className = 'language-option-check';
+    check.setAttribute('aria-hidden', 'true');
+    check.innerHTML = '<svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg>';
+    option.append(name, code, check);
+    option.addEventListener('click', () => {
+      select.value = language.code;
+      select.dispatchEvent(new Event('change', { bubbles: true }));
+      closeLanguagePicker(selectId, true);
+    });
+    list.append(option);
+  });
+  count.textContent = matches.length === 1 ? '1 language' : `${matches.length} languages`;
+  let empty = list.nextElementSibling;
+  if (!empty || !empty.classList.contains('language-no-results')) {
+    empty = document.createElement('div');
+    empty.className = 'language-no-results';
+    empty.textContent = 'No languages found. Try another search.';
+    empty.hidden = true;
+    list.after(empty);
+  }
+  empty.hidden = matches.length > 0;
+}
+
+function closeLanguagePicker(selectId, returnFocus = false) {
+  const trigger = document.getElementById(`${selectId}Trigger`);
+  const menu = document.getElementById(`${selectId}Menu`);
+  const picker = trigger.closest('.language-picker');
+  menu.hidden = true;
+  trigger.setAttribute('aria-expanded', 'false');
+  picker.classList.remove('is-open');
+  if (returnFocus) trigger.focus();
+}
+
+function openLanguagePicker(selectId) {
+  const trigger = document.getElementById(`${selectId}Trigger`);
+  const menu = document.getElementById(`${selectId}Menu`);
+  const picker = trigger.closest('.language-picker');
+  const otherId = selectId === 'sourceLanguage' ? 'targetLanguage' : 'sourceLanguage';
+  closeLanguagePicker(otherId);
+  menu.hidden = false;
+  trigger.setAttribute('aria-expanded', 'true');
+  picker.classList.add('is-open');
+  document.getElementById(`${selectId}Search`).value = '';
+  renderLanguageOptions(selectId);
+  document.getElementById(`${selectId}Search`).focus();
+}
+
+function setupLanguagePicker(selectId) {
+  const trigger = document.getElementById(`${selectId}Trigger`);
+  const menu = document.getElementById(`${selectId}Menu`);
+  const search = document.getElementById(`${selectId}Search`);
+  const list = document.getElementById(`${selectId}Options`);
+  trigger.addEventListener('click', () => {
+    if (menu.hidden) openLanguagePicker(selectId);
+    else closeLanguagePicker(selectId);
+  });
+  trigger.addEventListener('keydown', event => {
+    if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+      event.preventDefault();
+      openLanguagePicker(selectId);
+      const options = list.querySelectorAll('[role="option"]');
+      options[event.key === 'ArrowUp' ? options.length - 1 : 0]?.focus();
+    }
+  });
+  search.addEventListener('input', () => renderLanguageOptions(selectId));
+  menu.addEventListener('keydown', event => {
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      closeLanguagePicker(selectId, true);
+      return;
+    }
+    if (event.key !== 'ArrowDown' && event.key !== 'ArrowUp' && event.key !== 'Home' && event.key !== 'End') return;
+    const options = [...list.querySelectorAll('[role="option"]')];
+    if (!options.length) return;
+    event.preventDefault();
+    const current = options.indexOf(document.activeElement);
+    let next = event.key === 'Home' ? 0 : event.key === 'End' ? options.length - 1 : current < 0 ? 0 : current + (event.key === 'ArrowDown' ? 1 : -1);
+    next = Math.max(0, Math.min(options.length - 1, next));
+    options[next].focus();
+  });
+  menu.addEventListener('click', event => event.stopPropagation());
+  syncLanguagePickerText(selectId);
+}
 function updateSaveButton() {
   const saved = savedItems.some(item => item.source === sourceLanguage.value && item.target === targetLanguage.value && item.text === sourceText.value.trim() && item.translation === translatedValue);
   saveButton.disabled = !translatedValue;
@@ -250,6 +365,8 @@ async function translate() {
 
 populateLanguages(sourceLanguage, 'en');
 populateLanguages(targetLanguage, 'sw');
+setupLanguagePicker('sourceLanguage');
+setupLanguagePicker('targetLanguage');
 updateTargetLabel();
 updateInputCount();
 renderHistory();
@@ -257,6 +374,12 @@ renderSaved();
 renderSavedButtonState();
 
 document.querySelectorAll('.nav[data-view]').forEach(button => button.addEventListener('click', () => setView(button.dataset.view)));
+document.addEventListener('click', event => {
+  ['sourceLanguage', 'targetLanguage'].forEach(id => {
+    const trigger = document.getElementById(`${id}Trigger`);
+    if (!trigger.closest('.language-picker').contains(event.target)) closeLanguagePicker(id);
+  });
+});
 document.querySelector('#clearHistoryButton').addEventListener('click', () => { historyItems = []; renderHistory(); });
 document.querySelector('#clearSavedButton').addEventListener('click', () => { savedItems = []; persistSaved(); renderSaved(); updateSaveButton(); });
 translateButton.addEventListener('click', translate);

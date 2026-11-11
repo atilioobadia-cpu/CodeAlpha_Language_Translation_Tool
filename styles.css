@@ -58,3 +58,35 @@ body{background:#edf3f2;display:flex;align-items:center;justify-content:center}
 }
 @media(max-height:680px){.app{grid-template-rows:64px 46px minmax(0,1fr) 72px}.translate-workspace{height:min(38vh,290px);min-height:220px}.bottom-nav{height:72px}.bottom-icon{width:44px;height:44px}}
 @media(prefers-reduced-motion:reduce){.view,.swap-button,.nav,.bottom-icon{transition:none!important;animation:none!important}}
+
+/* Searchable language menus */
+.language-field{position:relative;z-index:4}
+.language-pair{position:relative;z-index:5}
+.language-field .field-label{display:block;margin:0 0 5px 4px;color:#5d727b;font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.language-picker{position:relative;width:100%}
+.language-trigger{width:100%;height:43px;padding:0 13px;border:1px solid #d7e4e2;border-radius:11px;background:#fff;color:#283945;display:flex;align-items:center;justify-content:space-between;gap:10px;text-align:left;font-size:14px;font-weight:700;transition:border-color .15s,background-color .15s,outline-color .15s}
+.language-trigger:hover,.language-picker.is-open .language-trigger{border-color:#8dbdb7;background:#fbfdfc}
+.language-trigger:focus-visible{outline:3px solid #e1f0ed;outline-offset:1px;border-color:var(--brand)}
+.language-trigger>svg{width:17px;height:17px;flex:none;fill:none;stroke:var(--brand);stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;transition:transform .18s ease}
+.language-picker.is-open .language-trigger>svg{transform:rotate(180deg)}
+.language-menu{position:absolute;z-index:20;top:calc(100% + 7px);left:0;width:min(100%,360px);min-width:260px;padding:9px;border:1px solid #dce8e6;border-radius:13px;background:#fff;box-shadow:0 12px 28px rgba(26,64,60,.12);transform-origin:top center;animation:language-menu-in .16s ease-out}
+.language-field:last-child .language-menu{left:auto;right:0}
+@keyframes language-menu-in{from{opacity:0;transform:translateY(-5px) scale(.985)}to{opacity:1;transform:translateY(0) scale(1)}}
+.language-search-wrap{height:36px;padding:0 9px;border:1px solid #e3ecea;border-radius:9px;background:#f8fbfa;display:flex;align-items:center;gap:8px}
+.language-search-wrap:focus-within{border-color:#9fc9c3;background:#fff}
+.language-search-wrap svg{width:15px;height:15px;flex:none;fill:none;stroke:#71818a;stroke-width:1.8;stroke-linecap:round}
+.language-search{width:100%;min-width:0;border:0;outline:0;background:transparent;color:#263943;font:600 12px "Nunito",sans-serif}
+.language-search::placeholder{color:#89989f}
+.language-options{max-height:218px;margin-top:6px;overflow:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#c8ddda transparent}
+.language-option{width:100%;min-height:34px;padding:5px 9px;border:0;border-radius:7px;background:transparent;color:#35464f;display:flex;align-items:center;gap:9px;text-align:left;font-size:12px;font-weight:600}
+.language-option:hover,.language-option:focus-visible{outline:0;background:#f0f7f5;color:var(--brand-dark)}
+.language-option[aria-selected="true"]{background:#eaf4f2;color:var(--brand-dark);font-weight:800}
+.language-option-name{flex:1}.language-option-code{color:#84939a;font-size:9px;font-weight:800;letter-spacing:.05em}
+.language-option-check{width:14px;height:14px;flex:none;opacity:0;color:var(--brand)}
+.language-option[aria-selected="true"] .language-option-check{opacity:1}
+.language-option-check svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.language-menu-count{margin:5px 2px 0;padding:6px 4px 0;border-top:1px solid #edf1f0;color:#7b8a90;font-size:9px;text-align:right}
+.language-no-results{padding:17px 8px;color:#78878e;font-size:11px;text-align:center}
+@media(max-width:760px){.language-trigger{height:37px;padding:0 9px;font-size:12px}.language-trigger>svg{width:14px;height:14px}.language-field .field-label{font-size:8px}.language-menu{min-width:min(260px,calc(100vw - 30px));width:min(330px,calc(100vw - 30px))}.language-field:last-child .language-menu{right:0}}
+
+.language-menu{box-shadow:none}
