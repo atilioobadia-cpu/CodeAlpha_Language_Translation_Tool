@@ -94,7 +94,9 @@ function renderLanguageOptions(selectId) {
     const check = document.createElement('span');
     check.className = 'language-option-check';
     check.setAttribute('aria-hidden', 'true');
-    check.innerHTML = '<svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg>';
+    const checkIcon = document.createElement('i');
+    checkIcon.dataset.lucide = 'check';
+    check.append(checkIcon);
     option.append(name, code, check);
     option.addEventListener('click', () => {
       select.value = language.code;
@@ -113,6 +115,7 @@ function renderLanguageOptions(selectId) {
     list.after(empty);
   }
   empty.hidden = matches.length > 0;
+  window.lucide?.createIcons({ root: list });
 }
 
 function closeLanguagePicker(selectId, returnFocus = false) {
@@ -377,6 +380,7 @@ updateInputCount();
 renderHistory();
 renderSaved();
 renderSavedButtonState();
+window.lucide?.createIcons();
 
 document.querySelectorAll('.nav[data-view]').forEach(button => button.addEventListener('click', () => setView(button.dataset.view)));
 document.querySelector('#homeLink').addEventListener('click', () => setView('translate'));

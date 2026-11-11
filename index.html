@@ -15,7 +15,7 @@
   <main class="app">
     <header class="topbar">
       <a class="brand" href="#translateView" aria-label="Lingua home" id="homeLink">
-        <span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v7a2.5 2.5 0 0 1-2.5 2.5H11l-4.5 4v-4.1A2.5 2.5 0 0 1 4 12.5z"/><path d="M8 8h8M8 11h5"/></svg></span>
+        <span class="brand-icon" aria-hidden="true"><i data-lucide="languages"></i></span>
         <span class="brand-copy"><small>LANGUAGE TOOL</small><strong>Lingua</strong></span>
       </a>
     </header>
@@ -26,22 +26,22 @@
           <div class="language-field">
             <button class="field-label picker-label" id="sourceLanguageCaption" type="button" aria-controls="sourceLanguageMenu" aria-expanded="false">Source language</button>
             <div class="language-picker" data-language-picker>
-              <button class="language-trigger" id="sourceLanguageTrigger" type="button" aria-haspopup="listbox" aria-expanded="false" aria-controls="sourceLanguageMenu" aria-labelledby="sourceLanguageCaption sourceLanguageValue"><span id="sourceLanguageValue">English</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+              <button class="language-trigger" id="sourceLanguageTrigger" type="button" aria-haspopup="listbox" aria-expanded="false" aria-controls="sourceLanguageMenu" aria-labelledby="sourceLanguageCaption sourceLanguageValue"><span id="sourceLanguageValue">English</span><i data-lucide="chevron-down" aria-hidden="true"></i></button>
               <div class="language-menu" id="sourceLanguageMenu" hidden>
-                <label class="language-search-wrap"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4.4 4.4"/></svg><input class="language-search" id="sourceLanguageSearch" type="search" placeholder="Search languages" autocomplete="off" aria-label="Search source languages"></label>
+                <label class="language-search-wrap"><i data-lucide="search" aria-hidden="true"></i><input class="language-search" id="sourceLanguageSearch" type="search" placeholder="Search languages" autocomplete="off" aria-label="Search source languages"></label>
                 <div class="language-options" id="sourceLanguageOptions" role="listbox" aria-labelledby="sourceLanguageCaption"></div>
                 <p class="language-menu-count" id="sourceLanguageCount">17 languages</p>
               </div>
               <select class="language-native" id="sourceLanguage" aria-label="Source language" tabindex="-1" hidden></select>
             </div>
           </div>
-          <button class="swap-button" id="swapButton" type="button" aria-label="Swap languages"><svg viewBox="0 0 24 24"><path d="M7 7h13l-3-3m3 3-3 3M17 17H4l3 3m-3-3 3-3"/></svg></button>
+          <button class="swap-button" id="swapButton" type="button" aria-label="Swap languages"><i data-lucide="arrow-left-right" aria-hidden="true"></i></button>
           <div class="language-field">
             <button class="field-label picker-label" id="targetLanguageCaption" type="button" aria-controls="targetLanguageMenu" aria-expanded="false">Target language</button>
             <div class="language-picker" data-language-picker>
-              <button class="language-trigger" id="targetLanguageTrigger" type="button" aria-haspopup="listbox" aria-expanded="false" aria-controls="targetLanguageMenu" aria-labelledby="targetLanguageCaption targetLanguageValue"><span id="targetLanguageValue">Swahili</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+              <button class="language-trigger" id="targetLanguageTrigger" type="button" aria-haspopup="listbox" aria-expanded="false" aria-controls="targetLanguageMenu" aria-labelledby="targetLanguageCaption targetLanguageValue"><span id="targetLanguageValue">Swahili</span><i data-lucide="chevron-down" aria-hidden="true"></i></button>
               <div class="language-menu" id="targetLanguageMenu" hidden>
-                <label class="language-search-wrap"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4.4 4.4"/></svg><input class="language-search" id="targetLanguageSearch" type="search" placeholder="Search languages" autocomplete="off" aria-label="Search target languages"></label>
+                <label class="language-search-wrap"><i data-lucide="search" aria-hidden="true"></i><input class="language-search" id="targetLanguageSearch" type="search" placeholder="Search languages" autocomplete="off" aria-label="Search target languages"></label>
                 <div class="language-options" id="targetLanguageOptions" role="listbox" aria-labelledby="targetLanguageCaption"></div>
                 <p class="language-menu-count" id="targetLanguageCount">17 languages</p>
               </div>
@@ -56,24 +56,24 @@
             <label class="sr-only" for="sourceText">Text to translate</label>
             <textarea class="text-input" id="sourceText" placeholder="Enter text to translate…" spellcheck="true"></textarea>
             <div class="input-footer">
-              <div class="panel-actions"><button class="action-button" id="micButton" type="button" aria-label="Dictate text" title="Dictate text"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0m-7 7v3m-4 0h8"/></svg></button><button class="action-button" id="sourceSpeakButton" type="button" aria-label="Listen to source text" title="Listen to source text"><svg viewBox="0 0 24 24"><path d="M11 5 6 9H3v6h3l5 4zM15.5 8.5a5 5 0 0 1 0 7m3-10a9 9 0 0 1 0 13"/></svg></button></div>
+              <div class="panel-actions"><button class="action-button" id="micButton" type="button" aria-label="Dictate text" title="Dictate text"><i data-lucide="mic" aria-hidden="true"></i></button><button class="action-button" id="sourceSpeakButton" type="button" aria-label="Listen to source text" title="Listen to source text"><i data-lucide="volume-2" aria-hidden="true"></i></button></div>
               <span class="count-label" id="byteCountFooter">0 / 500</span>
-              <button class="action-button" id="clearButton" type="button" aria-label="Clear source text" title="Clear text"><svg viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+              <button class="action-button" id="clearButton" type="button" aria-label="Clear source text" title="Clear text"><i data-lucide="x" aria-hidden="true"></i></button>
               <button class="translate-button" id="translateButton" type="button">Translate</button>
             </div>
           </section>
 
           <section class="output-card" aria-label="Translation result">
-            <div class="card-heading output-heading"><strong>Translation</strong><span class="language-result"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16M12 3v2m5 0c-.7 6-4.5 10-10 12m2-7c1.6 2.4 4.3 4.5 8 6"/></svg><span id="targetLanguageName">Swahili</span></span></div>
+            <div class="card-heading output-heading"><strong>Translation</strong><span class="language-result"><i data-lucide="languages" aria-hidden="true"></i><span id="targetLanguageName">Swahili</span></span></div>
             <p class="output-text empty" id="outputText">Your translation will appear here.</p>
             <div class="output-footer">
-              <button class="action-button" id="speakButton" type="button" aria-label="Listen to translation" title="Listen" disabled><svg viewBox="0 0 24 24"><path d="M11 5 6 9H3v6h3l5 4zM15.5 8.5a5 5 0 0 1 0 7m3-10a9 9 0 0 1 0 13"/></svg></button>
+              <button class="action-button" id="speakButton" type="button" aria-label="Listen to translation" title="Listen" disabled><i data-lucide="volume-2" aria-hidden="true"></i></button>
               <span class="footer-spacer"></span>
-              <button class="action-button" id="saveButton" type="button" aria-label="Save translation" title="Save translation" aria-pressed="false" disabled><svg viewBox="0 0 24 24"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3l-5.6 2.9 1.1-6.2L3 9.6l6.2-.9z"/></svg></button>
-              <button class="action-button" id="copyButton" type="button" aria-label="Copy translation" title="Copy" disabled><svg viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"/></svg></button>
-              <button class="action-button" id="thumbsUpButton" type="button" aria-label="Helpful translation" title="Helpful" disabled><svg viewBox="0 0 24 24"><path d="M7 10v11H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3Zm0 0 5-8a3 3 0 0 1 2 3v4h4.5a2.5 2.5 0 0 1 2.4 3.2l-2 7A2.5 2.5 0 0 1 16.5 21H7"/></svg></button>
-              <button class="action-button" id="thumbsDownButton" type="button" aria-label="Translation needs improvement" title="Needs improvement" disabled><svg viewBox="0 0 24 24"><path d="M7 14V3H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h3Zm0 0 5 8a3 3 0 0 0 2-3v-4h4.5a2.5 2.5 0 0 0 2.4-3.2l-2-7A2.5 2.5 0 0 0 16.5 3H7"/></svg></button>
-              <button class="action-button" id="shareButton" type="button" aria-label="Share translation" title="Share" disabled><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.7 10.6 6.6-4.2m-6.6 7 6.6 4"/></svg></button>
+              <button class="action-button" id="saveButton" type="button" aria-label="Save translation" title="Save translation" aria-pressed="false" disabled><i data-lucide="bookmark" aria-hidden="true"></i></button>
+              <button class="action-button" id="copyButton" type="button" aria-label="Copy translation" title="Copy" disabled><i data-lucide="copy" aria-hidden="true"></i></button>
+              <button class="action-button" id="thumbsUpButton" type="button" aria-label="Helpful translation" title="Helpful" disabled><i data-lucide="thumbs-up" aria-hidden="true"></i></button>
+              <button class="action-button" id="thumbsDownButton" type="button" aria-label="Translation needs improvement" title="Needs improvement" disabled><i data-lucide="thumbs-down" aria-hidden="true"></i></button>
+              <button class="action-button" id="shareButton" type="button" aria-label="Share translation" title="Share" disabled><i data-lucide="share-2" aria-hidden="true"></i></button>
             </div>
           </section>
         </div>
@@ -91,11 +91,12 @@
     </div>
 
     <nav class="bottom-nav" aria-label="Main navigation">
-      <button class="bottom-item nav" type="button" data-view="translate" aria-controls="translateView" aria-current="page"><span class="bottom-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m3 10 9-7 9 7"/><path d="M5 9v11h14V9M9 20v-7h6v7"/></svg></span><span>Home</span></button>
-      <button class="bottom-item nav" type="button" data-view="history" aria-controls="historyView"><span class="bottom-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 2.6-6.4L3 8m0-5v5h5"/><path d="M12 7v5l3 2"/></svg></span><span>History</span></button>
-      <button class="bottom-item nav" type="button" data-view="saved" aria-controls="savedView"><span class="bottom-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3l-5.6 2.9 1.1-6.2L3 9.6l6.2-.9z"/></svg></span><span>Saved</span></button>
+      <button class="bottom-item nav" type="button" data-view="translate" aria-controls="translateView" aria-current="page"><span class="bottom-icon" aria-hidden="true"><i data-lucide="house"></i></span><span>Home</span></button>
+      <button class="bottom-item nav" type="button" data-view="history" aria-controls="historyView"><span class="bottom-icon" aria-hidden="true"><i data-lucide="history"></i></span><span>History</span></button>
+      <button class="bottom-item nav" type="button" data-view="saved" aria-controls="savedView"><span class="bottom-icon" aria-hidden="true"><i data-lucide="bookmark"></i></span><span>Saved</span></button>
     </nav>
   </main>
-  <script src="app.js?v=lingua-home-20261111"></script>
+  <script src="vendor/lucide.min.js"></script>
+  <script src="app.js?v=lucide-icons-local-20261111"></script>
 </body>
 </html>
