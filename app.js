@@ -379,6 +379,8 @@ renderSaved();
 renderSavedButtonState();
 
 document.querySelectorAll('.nav[data-view]').forEach(button => button.addEventListener('click', () => setView(button.dataset.view)));
+document.querySelector('#homeLink').addEventListener('click', () => setView('translate'));
+setView('translate');
 document.addEventListener('click', event => {
   ['sourceLanguage', 'targetLanguage'].forEach(id => {
     const trigger = document.getElementById(`${id}Trigger`);
