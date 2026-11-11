@@ -144,11 +144,27 @@ function setupLanguagePicker(selectId) {
   const menu = document.getElementById(`${selectId}Menu`);
   const search = document.getElementById(`${selectId}Search`);
   const list = document.getElementById(`${selectId}Options`);
-  trigger.addEventListener('click', () => {
+  const togglePicker = () => {
     if (menu.hidden) openLanguagePicker(selectId);
-    else closeLanguagePicker(selectId);
+    else closeLanguagePicker(selectId, true);
+  };
+  trigger.addEventListener('pointerdown', event => {
+    if (event.button !== 0) return;
+    event.preventDefault();
+    togglePicker();
+  });
+  trigger.addEventListener('click', event => {
+    if (event.detail === 0) {
+      event.preventDefault();
+      togglePicker();
+    }
   });
   trigger.addEventListener('keydown', event => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      togglePicker();
+      return;
+    }
     if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
       event.preventDefault();
       openLanguagePicker(selectId);
