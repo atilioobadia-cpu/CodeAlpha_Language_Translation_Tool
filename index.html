@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=lingua-nunito-20261111">
+  <link rel="stylesheet" href="styles.css?v=lingua-home-20261111">
 </head>
 <body>
   <main class="app">
@@ -88,18 +88,14 @@
         <div class="secondary-heading"><div><p>KEEP IMPORTANT PHRASES</p><h2>Saved</h2></div><button class="clear-history" id="clearSavedButton" type="button" hidden>Clear</button></div>
         <div class="saved-list" id="savedList"></div><p class="history-empty" id="savedEmpty">Translations you save will appear here.</p>
       </section>
-      <section class="view secondary-view" id="contributeView" aria-label="Contribute">
-        <div class="secondary-heading"><div><p>HELP US IMPROVE</p><h2>Contribute</h2></div></div>
-        <div class="contribute-card"><span class="contribute-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M4 17v4h16v-4"/></svg></span><h3>Share your feedback</h3><p>Tell us what would make Lingua more useful for your language needs.</p><a class="feedback-link" href="mailto:services@codealpha.tech?subject=Lingua%20translation%20feedback">Email feedback</a></div>
-      </section>
     </div>
 
-    <nav class="bottom-nav" aria-label="More Lingua pages">
+    <nav class="bottom-nav" aria-label="Main navigation">
+      <button class="bottom-item nav" type="button" data-view="translate" aria-controls="translateView" aria-current="page"><span class="bottom-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m3 10 9-7 9 7"/><path d="M5 9v11h14V9M9 20v-7h6v7"/></svg></span><span>Home</span></button>
       <button class="bottom-item nav" type="button" data-view="history" aria-controls="historyView"><span class="bottom-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 2.6-6.4L3 8m0-5v5h5"/><path d="M12 7v5l3 2"/></svg></span><span>History</span></button>
       <button class="bottom-item nav" type="button" data-view="saved" aria-controls="savedView"><span class="bottom-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3l-5.6 2.9 1.1-6.2L3 9.6l6.2-.9z"/></svg></span><span>Saved</span></button>
-      <button class="bottom-item nav" type="button" data-view="contribute" aria-controls="contributeView"><span class="bottom-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 20s-8-4.4-8-10a4.5 4.5 0 0 1 8-2.9A4.5 4.5 0 0 1 20 10c0 5.6-8 10-8 10Z"/><path d="M8 12h8m-4-4v8"/></svg></span><span>Contribute</span></button>
     </nav>
   </main>
-  <script src="app.js?v=lingua-nunito-20261111"></script>
+  <script src="app.js?v=lingua-home-20261111"></script>
 </body>
 </html>
