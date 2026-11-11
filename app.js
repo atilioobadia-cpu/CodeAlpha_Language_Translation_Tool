@@ -122,6 +122,7 @@ function closeLanguagePicker(selectId, returnFocus = false) {
   menu.hidden = true;
   trigger.setAttribute('aria-expanded', 'false');
   picker.classList.remove('is-open');
+  document.getElementById(`${selectId}Caption`).setAttribute('aria-expanded', 'false');
   if (returnFocus) trigger.focus();
 }
 
@@ -134,6 +135,7 @@ function openLanguagePicker(selectId) {
   menu.hidden = false;
   trigger.setAttribute('aria-expanded', 'true');
   picker.classList.add('is-open');
+  document.getElementById(`${selectId}Caption`).setAttribute('aria-expanded', 'true');
   document.getElementById(`${selectId}Search`).value = '';
   renderLanguageOptions(selectId);
   document.getElementById(`${selectId}Search`).focus();
@@ -141,6 +143,7 @@ function openLanguagePicker(selectId) {
 
 function setupLanguagePicker(selectId) {
   const trigger = document.getElementById(`${selectId}Trigger`);
+  const caption = document.getElementById(`${selectId}Caption`);
   const menu = document.getElementById(`${selectId}Menu`);
   const search = document.getElementById(`${selectId}Search`);
   const list = document.getElementById(`${selectId}Options`);
@@ -148,23 +151,9 @@ function setupLanguagePicker(selectId) {
     if (menu.hidden) openLanguagePicker(selectId);
     else closeLanguagePicker(selectId, true);
   };
-  trigger.addEventListener('pointerdown', event => {
-    if (event.button !== 0) return;
-    event.preventDefault();
-    togglePicker();
-  });
-  trigger.addEventListener('click', event => {
-    if (event.detail === 0) {
-      event.preventDefault();
-      togglePicker();
-    }
-  });
+  trigger.addEventListener('click', togglePicker);
+  caption.addEventListener('click', togglePicker);
   trigger.addEventListener('keydown', event => {
-    if (event.key === 'Enter' || event.key === ' ') {
-      event.preventDefault();
-      togglePicker();
-      return;
-    }
     if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
       event.preventDefault();
       openLanguagePicker(selectId);
@@ -393,7 +382,7 @@ document.querySelectorAll('.nav[data-view]').forEach(button => button.addEventLi
 document.addEventListener('click', event => {
   ['sourceLanguage', 'targetLanguage'].forEach(id => {
     const trigger = document.getElementById(`${id}Trigger`);
-    if (!trigger.closest('.language-picker').contains(event.target)) closeLanguagePicker(id);
+    if (!trigger.closest('.language-field').contains(event.target)) closeLanguagePicker(id);
   });
 });
 document.querySelector('#clearHistoryButton').addEventListener('click', () => { historyItems = []; renderHistory(); });

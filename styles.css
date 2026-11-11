@@ -101,3 +101,6 @@ body{background:#ebe9e9}
 .language-menu{z-index:999;pointer-events:auto;box-shadow:none}
 .language-trigger{position:relative;z-index:1;cursor:pointer;touch-action:manipulation}
 #translateView{overflow:visible}
+.picker-label{width:max-content;border:0;padding:0;background:transparent;text-align:left;cursor:pointer;font-family:inherit}
+.picker-label:hover{color:var(--brand-dark);text-decoration:underline;text-underline-offset:3px}
+.language-field:has(.picker-label:focus-visible){z-index:120}

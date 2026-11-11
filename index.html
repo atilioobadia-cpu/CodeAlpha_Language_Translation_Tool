@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=dropdown-fix-20261111">
 </head>
 <body>
   <main class="app">
@@ -32,7 +32,7 @@
       <section class="view active" id="translateView" aria-label="Text translation">
         <section class="language-pair" aria-label="Choose languages">
           <div class="language-field">
-            <span class="field-label" id="sourceLanguageCaption">Source language</span>
+            <button class="field-label picker-label" id="sourceLanguageCaption" type="button" aria-controls="sourceLanguageMenu" aria-expanded="false">Source language</button>
             <div class="language-picker" data-language-picker>
               <button class="language-trigger" id="sourceLanguageTrigger" type="button" aria-haspopup="listbox" aria-expanded="false" aria-controls="sourceLanguageMenu" aria-labelledby="sourceLanguageCaption sourceLanguageValue"><span id="sourceLanguageValue">English</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
               <div class="language-menu" id="sourceLanguageMenu" hidden>
@@ -45,7 +45,7 @@
           </div>
           <button class="swap-button" id="swapButton" type="button" aria-label="Swap languages"><svg viewBox="0 0 24 24"><path d="M7 7h13l-3-3m3 3-3 3M17 17H4l3 3m-3-3 3-3"/></svg></button>
           <div class="language-field">
-            <span class="field-label" id="targetLanguageCaption">Target language</span>
+            <button class="field-label picker-label" id="targetLanguageCaption" type="button" aria-controls="targetLanguageMenu" aria-expanded="false">Target language</button>
             <div class="language-picker" data-language-picker>
               <button class="language-trigger" id="targetLanguageTrigger" type="button" aria-haspopup="listbox" aria-expanded="false" aria-controls="targetLanguageMenu" aria-labelledby="targetLanguageCaption targetLanguageValue"><span id="targetLanguageValue">Swahili</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
               <div class="language-menu" id="targetLanguageMenu" hidden>
@@ -109,6 +109,6 @@
       <button class="bottom-item nav" type="button" data-view="contribute"><span class="bottom-icon"><svg viewBox="0 0 24 24"><path d="M12 20s-8-4.4-8-10a4.5 4.5 0 0 1 8-2.9A4.5 4.5 0 0 1 20 10c0 5.6-8 10-8 10Z"/><path d="M8 12h8m-4-4v8"/></svg></span><span>Contribute</span></button>
     </nav>
   </main>
-  <script src="app.js"></script>
+  <script src="app.js?v=dropdown-fix-20261111"></script>
 </body>
 </html>
