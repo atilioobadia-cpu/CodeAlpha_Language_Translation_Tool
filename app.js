@@ -7,6 +7,8 @@ let historyItems = [];
 let translatedValue = '';
 let requestController;
 let savedItems = [];
+let viewFlipTimer;
+const viewOrder = ['translate', 'history', 'saved'];
 try { savedItems = JSON.parse(localStorage.getItem('linguaSaved') || '[]'); } catch { savedItems = []; }
 
 const languages = [
@@ -219,7 +221,27 @@ function updateInputCount() {
 }
 
 function setView(viewName) {
-  document.querySelectorAll('.view').forEach(view => view.classList.toggle('active', view.id === `${viewName}View`));
+  const nextView = document.getElementById(`${viewName}View`);
+  const currentView = document.querySelector('.view.active');
+  if (!nextView || nextView === currentView) return;
+
+  clearTimeout(viewFlipTimer);
+  document.querySelectorAll('.view').forEach(view => {
+    view.classList.remove('flip-out-forward', 'flip-out-backward', 'flip-in-forward', 'flip-in-backward');
+    view.classList.toggle('active', view === nextView);
+  });
+
+  if (currentView && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const currentName = currentView.id.replace(/View$/, '');
+    const direction = viewOrder.indexOf(viewName) > viewOrder.indexOf(currentName) ? 'forward' : 'backward';
+    currentView.classList.add(`flip-out-${direction}`);
+    nextView.classList.add(`flip-in-${direction}`);
+    viewFlipTimer = setTimeout(() => {
+      currentView.classList.remove(`flip-out-${direction}`);
+      nextView.classList.remove(`flip-in-${direction}`);
+    }, 580);
+  }
+
   document.querySelectorAll('.nav[data-view]').forEach(button => {
     const active = button.dataset.view === viewName;
     button.classList.toggle('active', active);

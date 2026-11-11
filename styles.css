@@ -12,8 +12,18 @@ body{background:#edf3f2;display:flex;align-items:center;justify-content:center}
 .tool-tab{min-width:112px;min-height:38px;border-radius:9px;font-size:13px}
 .tool-tab.active{border-color:#d9e8e5;background:#edf6f4;color:var(--brand-dark)}
 .view-shell{position:relative;isolation:isolate;perspective:1300px;background:#fbfcfc}
+.view-shell{transform-style:preserve-3d}
 .view{position:absolute;inset:0;display:flex;flex-direction:column;opacity:0;visibility:hidden;pointer-events:none;transform:rotateY(9deg) translateY(4px);transform-origin:center center;backface-visibility:hidden;transition:opacity .26s ease,transform .42s cubic-bezier(.2,.75,.25,1),visibility 0s linear .42s}
 .view.active{display:flex;opacity:1;visibility:visible;pointer-events:auto;transform:rotateY(0) translateY(0);transition-delay:0s}
+.view.flip-out-forward,.view.flip-out-backward,.view.flip-in-forward,.view.flip-in-backward{transition:none!important;animation-duration:560ms;animation-timing-function:cubic-bezier(.2,.75,.25,1);animation-fill-mode:both;backface-visibility:hidden}
+.view.flip-out-forward{z-index:2;visibility:visible;pointer-events:none;animation-name:pageFlipOutForward}
+.view.flip-in-forward{z-index:1;animation-name:pageFlipInForward}
+.view.flip-out-backward{z-index:2;visibility:visible;pointer-events:none;animation-name:pageFlipOutBackward}
+.view.flip-in-backward{z-index:1;animation-name:pageFlipInBackward}
+@keyframes pageFlipOutForward{from{transform:rotateY(0) scale(1);opacity:1}to{transform:rotateY(-78deg) scale(.96);opacity:.25}}
+@keyframes pageFlipInForward{from{transform:rotateY(78deg) scale(.96);opacity:.25}to{transform:rotateY(0) scale(1);opacity:1}}
+@keyframes pageFlipOutBackward{from{transform:rotateY(0) scale(1);opacity:1}to{transform:rotateY(78deg) scale(.96);opacity:.25}}
+@keyframes pageFlipInBackward{from{transform:rotateY(-78deg) scale(.96);opacity:.25}to{transform:rotateY(0) scale(1);opacity:1}}
 #translateView{align-items:center;justify-content:center;gap:9px;padding:14px 28px 10px}
 .language-pair{width:min(100%,930px);grid-template-columns:minmax(0,1fr) 48px minmax(0,1fr);gap:12px;margin:0}
 .language-field label{margin:0 0 5px 4px;color:#5d727b;font-size:10px;letter-spacing:.08em}
@@ -41,6 +51,14 @@ body{background:#edf3f2;display:flex;align-items:center;justify-content:center}
 .bottom-item.active{color:var(--brand-dark)}
 .secondary-view{width:min(100%,900px);left:50%;right:auto;transform:translateX(-50%) rotateY(9deg) translateY(4px);padding:26px 34px;align-items:center;justify-content:flex-start;overflow-y:auto;scrollbar-width:thin;scrollbar-color:#c8ddda transparent}
 .secondary-view.active{transform:translateX(-50%) rotateY(0) translateY(0)}
+.secondary-view.flip-out-forward{animation-name:pageFlipOutForwardCentered}
+.secondary-view.flip-in-forward{animation-name:pageFlipInForwardCentered}
+.secondary-view.flip-out-backward{animation-name:pageFlipOutBackwardCentered}
+.secondary-view.flip-in-backward{animation-name:pageFlipInBackwardCentered}
+@keyframes pageFlipOutForwardCentered{from{transform:translateX(-50%) rotateY(0) scale(1);opacity:1}to{transform:translateX(-50%) rotateY(-78deg) scale(.96);opacity:.25}}
+@keyframes pageFlipInForwardCentered{from{transform:translateX(-50%) rotateY(78deg) scale(.96);opacity:.25}to{transform:translateX(-50%) rotateY(0) scale(1);opacity:1}}
+@keyframes pageFlipOutBackwardCentered{from{transform:translateX(-50%) rotateY(0) scale(1);opacity:1}to{transform:translateX(-50%) rotateY(78deg) scale(.96);opacity:.25}}
+@keyframes pageFlipInBackwardCentered{from{transform:translateX(-50%) rotateY(-78deg) scale(.96);opacity:.25}to{transform:translateX(-50%) rotateY(0) scale(1);opacity:1}}
 .secondary-heading{width:100%;display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px;margin:0 0 15px}
 .secondary-heading h2{font-size:25px}.secondary-heading p{font-size:10px;letter-spacing:.1em}
 .history-list,.saved-list{width:min(100%,740px);grid-template-columns:minmax(0,1fr);column-gap:0;margin:0 auto}
